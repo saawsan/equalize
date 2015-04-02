@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr-FR" class="home home-1">
+<head>
+	<meta charset="UTF-8">
+	<title>equalize</title>
+	
+	<meta name="viewport" content="width=device-width">
+
+	<style>
+		*{
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			-o-box-sizing: border-box;
+			box-sizing: border-box;
+		}
+		body {
+			margin:0; padding:20px;
+			background:#FAFAFA; color:#333;
+			font:13px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+		}
+		h1 {
+			margin:0 0 1em; padding-bottom:0.2em;
+			border-bottom:1px solid #CCC;
+			font:italic normal 26px/1.5 Georgia, 'Times New Roman', serif;
+		}
+		.blocks-wrapper{
+			overflow:hidden;
+		}
+		.block{
+			float:left;
+			margin:0 1% 2em; padding:1em 3em;
+			border-bottom:5px solid #36A1AD;
+			width:48%;
+			background:#3DB3C1; color:#FFF;
+		}
+		.block2{
+			border-color:#E08480;
+			background:#F1A88E;
+		}
+	</style>
+</head>
+<body>
+	<h1>equalize</h1>
+	<p>Required: jquery.js - equalize-jplugin.js</p>
+	
+	<div class="blocks-wrapper" data-equalize>
+		<div class="block">
+			<p data-equalize-item>Quare hoc quidem praeceptum, cuiuscumque est, ad tollendam amicitiam valet; illud potius praecipiendum fuit, ut eam diligentiam adhiberemus in amicitiis comparandis, ut ne quando amare inciperemus eum, quem aliquando odisse possemus. </p>
+			<a href="#">More</a>
+		</div>
+		<div class="block block2">
+			<p data-equalize-item>Postremo ad id indignitatis est ventum, ut cum peregrini ob formidatam haut ita dudum alimentorum inopiam pellerentur ab urbe praecipites, sectatoribus disciplinarum liberalium inpendio paucis sine respiratione ulla extrusis, tenerentur minimarum adseclae veri, quique id simularunt ad tempus, et tria milia saltatricum ne interpellata quidem cum choris totidemque remanerent magistris.</p>
+			<a href="#">More</a>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="js/equalize-jplugin.js"></script>
+	<script>
+	</script>
+</body>
+</html>
