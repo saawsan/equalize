@@ -12,7 +12,7 @@
             function delayed () {
                 if (!execAsap) { func.apply(obj, args); }
                 timeout = null;
-            };
+            }
 
             if (timeout) { 
                 clearTimeout(timeout);
@@ -27,11 +27,10 @@
 
 })(jQuery,'smartresize');
 
+;(function ($) {
 
-/* TODO 
- * - Wait load images
- * - Nested data-equalize
- */
+})( jQuery );
+
 ;(function ($) {
     var pluginName = 'equalize';
     var defaults =  {};
@@ -44,6 +43,10 @@
 
         this.$elt = $(element);
         this.$items = this.$elt.find('[data-equalize-item]');
+        this.tType = [];
+        if(this.$elt.data('equalize').length){
+            this.tType = this.$elt.data('equalize').split(';');
+        }
         this.init();
     }
 
@@ -57,14 +60,30 @@
             });
         },
         initAllHeights: function () {
-            this.$items.css('height','auto');
-            this.nMaxHeight = this.getMaxHeight(this.getItemsHeight());
-            this.setItemsHeight();
+            // var tType = [];
+            var nMaxHeight;
+            if(this.tType.length){
+                // this.tType = this.$elt.data('equalize').split(';');
+                for(var i=0; i<this.tType.length; i++){
+                    this.initAllHeightsByType(this.tType[i]);
+                }
+            } else {
+                this.$items.css('height','auto');
+                nMaxHeight = this.getMaxHeight(this.getItemsHeight());
+                this.setItemsHeight(nMaxHeight);
+            }
         },
-        getItemsHeight: function () {
+        initAllHeightsByType: function (sType) {
+            var $items = this.$items.filter('[data-equalize-item='+sType+']');
+            $items.css('height','auto');
+            var nMaxHeight = this.getMaxHeight(this.getItemsHeight($items));
+            this.setItemsHeight(nMaxHeight, $items);
+        },
+        getItemsHeight: function ($items) {
             var oCfg = this;
             var tHeight = [];
-            oCfg.$items.each(function(){
+            var $currentItems = $items || oCfg.$items;
+            $currentItems.each(function(){
                 tHeight.push($(this).height());
             });
             return tHeight;
@@ -72,10 +91,11 @@
         getMaxHeight: function (tHeight) {
             return Math.max.apply(null, tHeight);
         },
-        setItemsHeight: function () {
+        setItemsHeight: function (nMaxHeight, $items) {
             var oCfg = this;
-            oCfg.$items.each(function(){
-                $(this).css('height', oCfg.nMaxHeight+'px');
+            var $currentItems = $items || oCfg.$items;
+            $currentItems.each(function(){
+                $(this).css('height', nMaxHeight+'px');
             });
         }
     };
@@ -90,7 +110,8 @@
         return this;
     };
 
-    $(window).on('load', function() {
+    //Use 'onload' to insure all images are fully loaded before equalize height. It may not work properly on all browsers.
+    $(window).bind('load', function() {
         $('[data-equalize]')[pluginName]();
     });
 
