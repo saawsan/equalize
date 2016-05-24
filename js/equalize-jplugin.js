@@ -28,10 +28,6 @@
 })(jQuery,'smartresize');
 
 ;(function ($) {
-
-})( jQuery );
-
-;(function ($) {
     var pluginName = 'equalize';
     var defaults =  {};
 
@@ -84,7 +80,7 @@
             var tHeight = [];
             var $currentItems = $items || oCfg.$items;
             $currentItems.each(function(){
-                tHeight.push($(this).height());
+                tHeight.push($(this).outerHeight());
             });
             return tHeight;
         },
